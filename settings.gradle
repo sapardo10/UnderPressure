@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "UnderPressure"
+rootProject.name = "Hema"
 include ':app'
 include ':interactors'
 include ':data'

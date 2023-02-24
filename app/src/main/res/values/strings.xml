@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">UnderPressure</string>
+    <string name="app_name" translatable="false">Hema</string>
     <string name="systolic_blood_pressure">Systolic blood pressure</string>
     <string name="diastolic_blood_pressure">Diastolic blood pressure</string>
-    <string name="heatbeat">Heartbeat</string>
+    <string name="heartbeat">Heartbeat</string>
 </resources>

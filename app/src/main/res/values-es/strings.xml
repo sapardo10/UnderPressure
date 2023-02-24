@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="systolic_blood_pressure">Presión sistólica</string>
+    <string name="diastolic_blood_pressure">Presión diastólica</string>
+    <string name="heartbeat">Ritmo cardíaco</string>
+</resources>
