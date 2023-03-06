@@ -5,6 +5,7 @@ import com.anarkio.hema.database.BloodPressureReadingEntity
 
 fun BloodPressureReading.toEntity(): BloodPressureReadingEntity {
     return BloodPressureReadingEntity(
+        uid = uid,
         dateTime = dateTime,
         diastolicReading = diastolicReading,
         heartRate = heartRate,

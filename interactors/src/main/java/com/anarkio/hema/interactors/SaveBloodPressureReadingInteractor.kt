@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SaveBloodPressureReadingInteractor @Inject constructor(
     private val bloodPressureReadingRepository: BloodPressureReadingRepository
 ) {
-    operator fun invoke(reading: BloodPressureReading): ResultWrapper<BloodPressureReading> {
+    suspend operator fun invoke(reading: BloodPressureReading): ResultWrapper<BloodPressureReading> {
         return bloodPressureReadingRepository.saveBloodPressureReading(reading)
     }
 }

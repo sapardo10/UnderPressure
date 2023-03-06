@@ -28,52 +28,23 @@ fun HomeScreen(
     viewModel: HomeScreenViewModel
 ) {
     val homeScreenState by viewModel.uiState.collectAsState()
-    
+
     HomeScreenContent(
         homeScreenState = homeScreenState,
-        onSaveButtonClicked = viewModel::saveNewReading
+        newReadingFormViewModel = viewModel.newReadingFormViewModel
     )
 }
 
 @Composable
 fun HomeScreenContent(
-    onSaveButtonClicked: () -> Unit,
-    homeScreenState: HomeScreenState
+    homeScreenState: HomeScreenState,
+    newReadingFormViewModel: NewReadingFormViewModel
 ) {
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                HemaLabel(text = stringResource(R.string.systolic_blood_pressure))
-                HemaTextField(onChanged = { _ -> })
-            }
-            Spacer(modifier = Modifier.weight(0.2f))
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                HemaLabel(text = stringResource(R.string.diastolic_blood_pressure))
-                HemaTextField(onChanged = { _ -> })
-            }
-        }
-
-        Column {
-            HemaLabel(text = stringResource(R.string.heartbeat))
-            HemaTextField(onChanged = { _ -> })
-        }
-
-        Button(
-            onClick = onSaveButtonClicked
-        ) {
-            Text("Save new reading")
-        }
-        
+        NewReadingForm(viewModel = newReadingFormViewModel)
         when(homeScreenState) {
             HomeScreenState.NoReadings -> Text("No readings")
             HomeScreenState.Error -> Text("Error fetching readings")
@@ -85,14 +56,12 @@ fun HomeScreenContent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     items(homeScreenState.readings) {
-                        PressureRecordingItem(index = it.uid)
+                        PressureRecordingItem(viewModel = it)
                     }
                 }
             }
             HomeScreenState.Loading -> CircularProgressIndicator()
         }
-
-        
     }
 }
 
@@ -100,7 +69,7 @@ fun HomeScreenContent(
 @Composable
 fun Preview_HomeScreen() {
     HomeScreenContent(
-        onSaveButtonClicked = {},
-        homeScreenState = HomeScreenState.NoReadings
+        homeScreenState = HomeScreenState.NoReadings,
+        newReadingFormViewModel = NewReadingFormViewModel()
     )
 }
