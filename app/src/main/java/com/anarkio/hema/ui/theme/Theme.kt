@@ -13,14 +13,16 @@ private val DarkColorPalette = darkColors(
     secondary = OxfordBlue,
     background = Color.Black,
     onBackground = Color.White,
+    surface = TaupeGray
 )
 
 private val LightColorPalette = lightColors(
     primary = Folly,
     primaryVariant = Folly,
     secondary = OxfordBlue,
-    background = OldLace,
+    background = Color.White,
     onBackground = Color.Black,
+    surface = TaupeGray
 
     /* Other default colors to override
     surface = Color.White,
@@ -36,7 +38,7 @@ fun HemaTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorPalette
     } else {
         LightColorPalette
     }

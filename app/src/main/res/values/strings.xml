@@ -2,5 +2,9 @@
     <string name="app_name" translatable="false">Hema</string>
     <string name="systolic_blood_pressure">Systolic blood pressure</string>
     <string name="diastolic_blood_pressure">Diastolic blood pressure</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
     <string name="heartbeat">Heartbeat</string>
+    <string name="home_screen_greeting">Good day</string>
+    <string name="hema_icon_cd">Icon of the application</string>
 </resources>

@@ -1,15 +1,21 @@
 package com.anarkio.hema.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import com.anarkio.hema.R
 import com.anarkio.hema.widgets.HemaLabel
 import com.anarkio.hema.widgets.HemaTextField
@@ -18,44 +24,59 @@ import com.anarkio.hema.widgets.HemaTextField
 fun NewReadingForm(
     viewModel: NewReadingFormViewModel
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+    Column(
+        Modifier.wrapContentHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            HemaLabel(text = stringResource(R.string.systolic_blood_pressure))
-            HemaTextField(
-                onChanged = { viewModel.updateSystolicBloodPressure(it) },
-                value = viewModel.systolicBloodPressure
-            )
+            Column(
+                modifier = Modifier.weight(1f),
+            ) {
+                HemaTextField(
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = stringResource(R.string.systolic),
+                    onChanged = { viewModel.updateSystolicBloodPressure(it) },
+                    value = viewModel.systolicBloodPressure
+                )
+                HemaTextField(
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = stringResource(R.string.diastolic),
+                    onChanged = { viewModel.updateDiastolicBloodPressure(it) },
+                    value = viewModel.diastolicBloodPressure
+                )
+            }
+
+            Column(
+                modifier = Modifier.weight(1f),
+            ) {
+                HemaTextField(
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = stringResource(R.string.heartbeat),
+                    onChanged = { viewModel.updateHeartRate(it) },
+                    value = viewModel.heartRate
+                )
+            }
         }
-        Spacer(modifier = Modifier.weight(0.2f))
-        Column(
-            modifier = Modifier.weight(1f)
+
+        Button(
+            onClick = {
+                viewModel.onSaveButtonTapped()
+            }
         ) {
-            HemaLabel(text = stringResource(R.string.diastolic_blood_pressure))
-            HemaTextField(
-                onChanged = { viewModel.updateDiastolicBloodPressure(it) },
-                value = viewModel.diastolicBloodPressure
-            )
+            Text("Save new reading")
         }
     }
+}
 
-    Column {
-        HemaLabel(text = stringResource(R.string.heartbeat))
-        HemaTextField(
-            onChanged = { viewModel.updateHeartRate(it) },
-            value = viewModel.heartRate
+@Preview
+@Composable
+fun Preview_NewReadingForm() {
+    NewReadingForm(
+        viewModel = NewReadingFormViewModel(
+            onSaveNewReading = {}
         )
-    }
-
-    Button(
-        onClick = {
-            viewModel.onSaveButtonTapped()
-        }
-    ) {
-        Text("Save new reading")
-    }
+    )
 }

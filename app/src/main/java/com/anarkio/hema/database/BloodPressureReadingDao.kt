@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BloodPressureReadingDao {
-    @Query("SELECT * FROM blood_pressure_reading")
+    @Query("SELECT * FROM blood_pressure_reading ORDER BY date_time DESC")
     fun getAll(): Flow<List<BloodPressureReadingEntity>>
 
     @Insert

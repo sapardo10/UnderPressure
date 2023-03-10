@@ -5,8 +5,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.EMPTY_STRING_ARRAY
 import com.anarkio.hema.data.models.BloodPressureReading
 import com.anarkio.hema.data.models.ResultWrapper
+import com.anarkio.hema.data.utils.HemaConstants.EMPTY_STRING
 import com.anarkio.hema.interactors.DeleteBloodPressureReadingInteractor
 import com.anarkio.hema.interactors.GetAllBloodPressureReadingsInteractor
 import com.anarkio.hema.interactors.SaveBloodPressureReadingInteractor
@@ -17,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -33,8 +34,6 @@ class HomeScreenViewModel @Inject constructor(
         NewReadingFormViewModel(onSaveNewReading = this::onSaveButtonClicked)
     }
 
-    var readingsViewModels by mutableStateOf(emptyList<PressureRecordingItemViewModel>())
-
     init {
         getBloodPressureReadingsViewModel()
     }
@@ -48,6 +47,7 @@ class HomeScreenViewModel @Inject constructor(
     private fun onSaveButtonClicked(reading: BloodPressureReading) {
         viewModelScope.launch(Dispatchers.IO) {
             saveBloodPressureReadingInteractor.invoke(reading)
+            newReadingFormViewModel.cleanForm()
             getBloodPressureReadingsViewModel()
         }
     }

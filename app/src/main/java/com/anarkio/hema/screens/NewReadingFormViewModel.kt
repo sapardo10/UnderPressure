@@ -4,25 +4,32 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.anarkio.hema.data.models.BloodPressureReading
+import com.anarkio.hema.data.utils.HemaConstants.EMPTY_STRING
 import java.util.Calendar
 
 class NewReadingFormViewModel(
     val onSaveNewReading: (BloodPressureReading) -> Unit = {},
 ) {
-    var diastolicBloodPressure by mutableStateOf("")
+    var diastolicBloodPressure by mutableStateOf(EMPTY_STRING)
         private set
 
-    var heartRate by mutableStateOf("")
+    var heartRate by mutableStateOf(EMPTY_STRING)
         private set
 
-    var systolicBloodPressure by mutableStateOf("")
+    var systolicBloodPressure by mutableStateOf(EMPTY_STRING)
         private set
+
+    fun cleanForm() {
+        systolicBloodPressure = EMPTY_STRING
+        diastolicBloodPressure = EMPTY_STRING
+        heartRate = EMPTY_STRING
+    }
 
     fun updateSystolicBloodPressure(input: String) {
         systolicBloodPressure = if (input.toIntOrNull() != null) {
             input
         } else {
-            ""
+            EMPTY_STRING
         }
     }
 
@@ -30,7 +37,7 @@ class NewReadingFormViewModel(
         diastolicBloodPressure = if (input.toIntOrNull() != null) {
             input
         } else {
-            ""
+            EMPTY_STRING
         }
     }
 
@@ -38,7 +45,7 @@ class NewReadingFormViewModel(
         heartRate = if (newHeartRate.toIntOrNull() != null) {
             newHeartRate
         } else {
-            ""
+            EMPTY_STRING
         }
     }
 

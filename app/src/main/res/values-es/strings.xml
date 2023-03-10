@@ -2,5 +2,9 @@
 <resources>
     <string name="systolic_blood_pressure">Presión sistólica</string>
     <string name="diastolic_blood_pressure">Presión diastólica</string>
+    <string name="systolic">Sistólica</string>
     <string name="heartbeat">Ritmo cardíaco</string>
+    <string name="home_screen_greeting">Buenos días</string>
+    <string name="hema_icon_cd">Ícono de la aplicación</string>
+    <string name="diastolic">Diastólica</string>
 </resources>
